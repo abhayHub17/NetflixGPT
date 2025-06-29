@@ -2,6 +2,11 @@ import React, { useRef } from "react";
 import Header from "./Header";
 import { useState } from "react";
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -11,18 +16,53 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
   const handleButtonClick = () => {
     let errMessage = checkValidData(
+      isSignInForm ? "Valid Name" : name.current?.value || "",
       email.current.value,
       password.current.value
     );
     setErrorMessage(errMessage);
 
-    // console.log(email.current.value);
-    // console.log(password.current.value);
+    if (errMessage) return;
+
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " - " + errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " - " + errorMessage);
+        });
+    }
   };
 
   return (
@@ -46,6 +86,7 @@ const Login = () => {
         )}
         {!isSignInForm && (
           <input
+            ref={name}
             id="name"
             className="m-3 p-3 bg-transparent rounded-md text-white border-2 border-gray-400"
             type="name"
