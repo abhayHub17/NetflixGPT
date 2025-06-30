@@ -1,3 +1,3 @@
-To handle sign in / sign out, we will use onAuthStateChanged from firebase
+BugFix: If the user is not logged in then redirect /browse to login page and vice versa.
 
-For sign out specifically we will use
+Unscribed to the onAuthStateChange callback function otherwise it will be called everytime the header is rendered and the useEffect is called.

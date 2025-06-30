@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef } from "react";
 import Header from "./Header";
 import { useState } from "react";
@@ -11,11 +12,11 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { AVATAR_URL, LOGIN_BG } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
@@ -47,7 +48,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/91273972?v=4",
+            photoURL: AVATAR_URL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -59,7 +60,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
+              // navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -81,8 +82,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
-          // console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -96,11 +95,7 @@ const Login = () => {
     <div className="">
       <Header />
       <div className="absolute min-h-screen overflow-hidden w-full h-full object-cover">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/75b0ed49-75ab-4a63-bd45-37bc2c95cb73/web/IN-en-20250623-TRIFECTA-perspective_ae5833b7-6ce5-4e88-853e-014f38c506f1_large.jpg"
-          alt="bg-img"
-          className=""
-        />
+        <img src={LOGIN_BG} alt="bg-img" className="" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -144,10 +139,6 @@ const Login = () => {
         >
           {isSignInForm ? "Sign in" : "Sign Up"}
         </button>
-        {/* <span className="text-white text-center p-2">OR</span> */}
-        {/* <button className="m-2 rounded-md p-2 bg-gray-600 text-white">
-          Use a sign-in code
-        </button> */}
         {isSignInForm && (
           <p className="text-gray-400 p-2 m-2">
             New to Netflix?
