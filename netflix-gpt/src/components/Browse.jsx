@@ -1,27 +1,8 @@
-import React, { useEffect } from "react";
+import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import Header from "./Header";
-import { API_OPTIONS } from "../utils/constants";
-import { useDispatch } from "react-redux";
-import { addNowPlayingMovies } from "../utils/moviesSlice";
 
 const Browse = () => {
-  const dispatch = useDispatch();
-
-  const fetchNowPlayingMovies = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-      API_OPTIONS
-    );
-
-    const json = await data.json();
-    dispatch(addNowPlayingMovies(json.results));
-    console.log(json.results);
-  };
-
-  useEffect(() => {
-    fetchNowPlayingMovies();
-  }, []);
-
+  useNowPlayingMovies();
   return (
     <div>
       <Header />
