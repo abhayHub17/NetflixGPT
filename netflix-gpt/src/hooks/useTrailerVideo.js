@@ -14,14 +14,14 @@ const useTrailerVideo = (movieId) => {
     );
 
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
 
     //results is the array of videos and we are filtering for trailer
     const filterTrailer = json.results.filter(
       (video) => video.type === "Trailer"
     );
     const trailer = filterTrailer.length ? filterTrailer[0] : json.results[0];
-    console.log(trailer);
+    // console.log(trailer);
     // setTrailerId(trailer.key);
     dispatch(addTrailerVideo(trailer));
   };
