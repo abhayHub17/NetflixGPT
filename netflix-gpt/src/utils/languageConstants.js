@@ -1,0 +1,43 @@
+const lang = {
+  en: {
+    search: "Search",
+    GPTSearchPlaceholder: "What would you like to watch?",
+    GPTSearchButton: "GPT Search",
+    browseButton: "Browse",
+    signOut: "Sign Out",
+    nowPlaying: "Now Playing",
+    topRated: "Top Rated",
+    popular: "Popular",
+    upcoming: "Upcoming",
+    play: "Play",
+    moreInfo: "More Info",
+  },
+  hindi: {
+    search: "खोज",
+    GPTSearchPlaceholder: "आप क्या देखना चाहेंगे?",
+    GPTSearchButton: "GPT खोज",
+    browseButton: "ब्राउज़ करें",
+    signOut: "साइन आउट करें",
+    nowPlaying: "अभी चल रहा है",
+    topRated: "सबसे ज़्यादा रेटिंग वाला",
+    popular: "लोकप्रिय",
+    upcoming: "आगामी",
+    play: "चलाएँ",
+    moreInfo: "अधिक जानकारी",
+  },
+  spanish: {
+    search: "Buscar",
+    GPTSearchPlaceholder: "Qué te gustaría ver?",
+    GPTSearchButton: "Búsqueda GPT",
+    browseButton: "Explorar",
+    signOut: "Cerrar sesión",
+    nowPlaying: "En reproducción",
+    topRated: "Mejor valorado",
+    popular: "Popular",
+    upcoming: "Próximamente",
+    play: "Jugar",
+    moreInfo: "Más info",
+  },
+};
+
+export default lang;
